@@ -167,7 +167,11 @@
   };
 
   const switchPanel = (name) => {
-    $$(".tab").forEach((b) => b.classList.toggle("is-active", b.dataset.tab === name));
+    $$(".tab").forEach((b) => {
+      const active = b.dataset.tab === name;
+      b.classList.toggle("is-active", active);
+      if (active) b.scrollIntoView({ inline: "nearest", block: "nearest" });
+    });
     $$(".panel").forEach((p) => p.classList.toggle("is-active", p.dataset.panel === name));
     const main = $("#main");
     if (main) main.scrollIntoView({ block: "start" });
@@ -1582,7 +1586,7 @@
       state.decimals = 4;
       state.motion = "auto";
       state.score = 0;
-      state.diff = "normal";
+      state.diff = 2;
       state.streak = 0;
       state.hypRows = [];
       applySettings();

@@ -1,629 +1,667 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Bayes Lab — Premium interactive Bayes’ theorem learning</title>
-<meta name="author" content="Bayes Lab"/>
-<meta name="referrer" content="strict-origin-when-cross-origin"/>
-<meta content="Premium, interactive Bayes’ theorem learning lab: guided examples, medical test PPV/NPV, multi‑hypothesis updates, a safe calculator, quizzes, and an offline tutor." name="description"/>
-<meta name="copyright" content="© 2025 querosdev">
-<meta name="license" content="CC BY-NC-ND 4.0">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Bayes Lab — Premium interactive Bayes’ theorem learning</title>
+  <meta name="author" content="Bayes Lab" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta
+    content="Premium, interactive Bayes’ theorem learning lab: guided examples, medical test PPV/NPV, multi‑hypothesis updates, a safe calculator, quizzes, and an offline tutor."
+    name="description" />
+  <meta name="copyright" content="© 2025 querosdev">
+  <meta name="license" content="CC BY-NC-ND 4.0">
 
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/><link href="./style.css" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap"
+    rel="stylesheet" />
+  <link href="./style.css" rel="stylesheet" />
 </head>
+
 <body data-theme="midnight">
-<a class="skip" href="#main">Skip to content</a>
-<header class="topbar">
-<div class="brand">
-<div aria-hidden="true" class="logo">
-<span class="dot"></span><span class="dot"></span><span class="dot"></span>
-</div>
-<div class="brand-text">
-<div class="brand-title">Bayes Lab</div>
-<div class="brand-subtitle">A clean, interactive lab for Bayesian reasoning</div>
-</div>
-</div>
-<nav aria-label="Primary" class="tabs">
-<button class="tab is-active" data-tab="learn" type="button">Learn</button>
-<button class="tab" data-tab="medical" type="button">Medical Test</button>
-<button class="tab" data-tab="multi" type="button">Multi‑Hypothesis</button>
-<button class="tab" data-tab="scenarios" type="button">Scenarios</button>
-<button class="tab" data-tab="quiz" type="button">Quiz</button>
-<button class="tab" data-tab="tutor" type="button">Tutor</button>
-<button class="tab" data-tab="tools" type="button">Tools</button>
-</nav>
-<div class="top-actions">
-<div class="pill" id="scorePill" title="Learning score">
-<span class="pill-label">Score</span>
-<span class="pill-value" id="scoreValue">0</span>
-</div>
-<button aria-controls="settingsDialog" aria-haspopup="dialog" aria-label="Open settings" class="icon-btn" id="settingsBtn" type="button">
-<span aria-hidden="true">Settings</span>
-</button>
-</div>
-</header>
-<main class="main" id="main">
-<section class="panel is-active" data-panel="learn" id="panel-learn">
-<div class="grid-2">
-<article class="card">
-<h2>Bayes’ theorem, in plain language</h2>
-<p class="lead">
-Bayes answers one question: <strong>after seeing evidence</strong>, how should your belief in a hypothesis change?
-Start with a <strong>base rate</strong> (prior), weigh the evidence (likelihood), then normalize to get the <strong>posterior</strong>.
-</p>
-<div class="formula">
-<div class="mono">P(H | E) = <span class="frac"><span class="top">P(E | H) · P(H)</span><span class="bar"></span><span class="bottom">P(E)</span></span></div>
-<div class="muted">H = hypothesis, E = evidence</div>
-</div>
-<div class="stepper" id="stepper">
-<button class="step is-on" data-step="prior" type="button">
-<span class="k">Prior</span>
-<span class="v mono">P(H)</span>
-<span class="d">What you believe before seeing E.</span>
-</button>
-<button class="step is-on" data-step="likelihood" type="button">
-<span class="k">Likelihood</span>
-<span class="v mono">P(E|H)</span>
-<span class="d">How expected E is if H were true.</span>
-</button>
-<button class="step is-on" data-step="evidence" type="button">
-<span class="k">Evidence</span>
-<span class="v mono">P(E)</span>
-<span class="d">How common E is overall.</span>
-</button>
-<button class="step is-on" data-step="posterior" type="button">
-<span class="k">Posterior</span>
-<span class="v mono">P(H|E)</span>
-<span class="d">Your updated belief after seeing E.</span>
-</button>
-</div>
-<div class="callout">
-<div class="callout-title">Why people get this wrong</div>
-<div class="callout-body">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="brand">
+      <div aria-hidden="true" class="logo">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">Bayes Lab</div>
+        <div class="brand-subtitle">A clean, interactive lab for Bayesian reasoning</div>
+      </div>
+    </div>
+    <nav aria-label="Primary" class="tabs">
+      <button class="tab is-active" data-tab="learn" type="button">Learn</button>
+      <button class="tab" data-tab="medical" type="button">Medical Test</button>
+      <button class="tab" data-tab="multi" type="button">Multi‑Hypothesis</button>
+      <button class="tab" data-tab="scenarios" type="button">Scenarios</button>
+      <button class="tab" data-tab="quiz" type="button">Quiz</button>
+      <button class="tab" data-tab="tutor" type="button">Tutor</button>
+      <button class="tab" data-tab="tools" type="button">Tools</button>
+    </nav>
+    <div class="top-actions">
+      <div class="pill" id="scorePill" title="Learning score">
+        <span class="pill-label">Score</span>
+        <span class="pill-value" id="scoreValue">0</span>
+      </div>
+      <button aria-controls="settingsDialog" aria-haspopup="dialog" aria-label="Open settings" class="icon-btn"
+        id="settingsBtn" type="button">
+        <span aria-hidden="true">Settings</span>
+      </button>
+    </div>
+  </header>
+  <main class="main" id="main">
+    <section class="panel is-active" data-panel="learn" id="panel-learn">
+      <div class="grid-2">
+        <article class="card">
+          <h2>Bayes’ theorem, in plain language</h2>
+          <p class="lead">
+            Bayes answers one question: <strong>after seeing evidence</strong>, how should your belief in a hypothesis
+            change?
+            Start with a <strong>base rate</strong> (prior), weigh the evidence (likelihood), then normalize to get the
+            <strong>posterior</strong>.
+          </p>
+          <div class="formula">
+            <div class="mono">P(H | E) = <span class="frac"><span class="top">P(E | H) · P(H)</span><span
+                  class="bar"></span><span class="bottom">P(E)</span></span></div>
+            <div class="muted">H = hypothesis, E = evidence</div>
+          </div>
+          <div class="stepper" id="stepper">
+            <button class="step is-on" data-step="prior" type="button">
+              <span class="k">Prior</span>
+              <span class="v mono">P(H)</span>
+              <span class="d">What you believe before seeing E.</span>
+            </button>
+            <button class="step is-on" data-step="likelihood" type="button">
+              <span class="k">Likelihood</span>
+              <span class="v mono">P(E|H)</span>
+              <span class="d">How expected E is if H were true.</span>
+            </button>
+            <button class="step is-on" data-step="evidence" type="button">
+              <span class="k">Evidence</span>
+              <span class="v mono">P(E)</span>
+              <span class="d">How common E is overall.</span>
+            </button>
+            <button class="step is-on" data-step="posterior" type="button">
+              <span class="k">Posterior</span>
+              <span class="v mono">P(H|E)</span>
+              <span class="d">Your updated belief after seeing E.</span>
+            </button>
+          </div>
+          <div class="callout">
+            <div class="callout-title">Why people get this wrong</div>
+            <div class="callout-body">
               Humans often confuse <span class="mono">P(E|H)</span> with <span class="mono">P(H|E)</span>.
               Bayes is the bridge between them.
             </div>
-</div>
-<div class="actions-row">
-<button class="btn" id="jumpMedical" type="button">Try a medical example</button>
-<button class="btn ghost" id="jumpMulti" type="button">Try multi‑hypothesis</button>
-</div>
-<p class="small muted">
+          </div>
+          <div class="actions-row">
+            <button class="btn" id="jumpMedical" type="button">Try a medical example</button>
+            <button class="btn ghost" id="jumpMulti" type="button">Try multi‑hypothesis</button>
+          </div>
+          <p class="small muted">
             Reference: Wikipedia page for Bayes’ theorem (opens in a new tab).
             <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" rel="noreferrer" target="_blank">Bayes’ theorem</a>
-</p>
-</article>
-<aside class="card">
-<h2>Interactive mini‑example</h2>
-<p class="muted">Toggle pieces of the theorem and watch the posterior update.</p>
-<div class="mini">
-<div class="mini-row">
-<label class="field">
-<span class="field-label">Prior P(H)</span>
-<input class="input" id="miniPrior" inputmode="decimal" value="0.10"/>
-</label>
-<label class="field">
-<span class="field-label">Likelihood P(E|H)</span>
-<input class="input" id="miniLike" inputmode="decimal" value="0.80"/>
-</label>
-</div>
-<div class="mini-row">
-<label class="field">
-<span class="field-label">Alt. likelihood P(E|¬H)</span>
-<input class="input" id="miniAlt" inputmode="decimal" value="0.20"/>
-</label>
-<div class="field">
-<span class="field-label">Result</span>
-<div aria-live="polite" class="result" id="miniPosterior"></div>
-</div>
-</div>
-<div aria-live="polite" class="mini-steps" id="miniSteps"></div>
-<div class="mini-actions">
-<button class="btn ghost" id="miniRandom" type="button">Randomize</button>
-<button class="btn" id="miniExplain" type="button">Explain in steps</button>
-</div>
-</div>
-<div class="divider"></div>
-<h3>What “evidence” means</h3>
-<p class="muted">
+          </p>
+        </article>
+        <aside class="card">
+          <h2>Interactive mini‑example</h2>
+          <p class="muted">Toggle pieces of the theorem and watch the posterior update.</p>
+          <div class="mini">
+            <div class="mini-row">
+              <label class="field">
+                <span class="field-label">Prior P(H)</span>
+                <input class="input" id="miniPrior" inputmode="decimal" value="0.10" />
+              </label>
+              <label class="field">
+                <span class="field-label">Likelihood P(E|H)</span>
+                <input class="input" id="miniLike" inputmode="decimal" value="0.80" />
+              </label>
+            </div>
+            <div class="mini-row">
+              <label class="field">
+                <span class="field-label">Alt. likelihood P(E|¬H)</span>
+                <input class="input" id="miniAlt" inputmode="decimal" value="0.20" />
+              </label>
+              <div class="field">
+                <span class="field-label">Result</span>
+                <div aria-live="polite" class="result" id="miniPosterior"></div>
+              </div>
+            </div>
+            <div aria-live="polite" class="mini-steps" id="miniSteps"></div>
+            <div class="mini-actions">
+              <button class="btn ghost" id="miniRandom" type="button">Randomize</button>
+              <button class="btn" id="miniExplain" type="button">Explain in steps</button>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3>What “evidence” means</h3>
+          <p class="muted">
             In practice we compute <span class="mono">P(E)</span> by summing over mutually exclusive hypotheses:
           </p>
-<div class="formula compact">
-<div class="mono">P(E) = Σ<sub>i</sub> P(E|H<sub>i</sub>) · P(H<sub>i</sub>)</div>
-</div>
-<p class="muted small">
+          <div class="formula compact">
+            <div class="mono">P(E) = Σ<sub>i</sub> P(E|H<sub>i</sub>) · P(H<sub>i</sub>)</div>
+          </div>
+          <p class="muted small">
             You’ll see this explicitly in the Multi‑Hypothesis calculator.
           </p>
-</aside>
-</div>
-</section>
-<section class="panel" data-panel="medical" id="panel-medical">
-<div class="grid-2">
-<article class="card">
-<h2>Medical test Bayes (PPV/NPV)</h2>
-<p class="muted">Enter prevalence, sensitivity, and specificity. You’ll get P(D|+) and P(D|−), plus a frequency table for 10,000 people.</p>
-<div class="form-grid">
-<label class="field">
-<span class="field-label">Prevalence (prior) P(D)</span>
-<div class="field-inline">
-<div class="range-wrap"><input class="range" id="prevRange" max="1" min="0" step="0.0005" type="range" value="0.01"/></div>
-<input class="input mono" id="prevInput" inputmode="decimal" value="0.01"/>
-</div>
-</label>
-<label class="field">
-<span class="field-label">Sensitivity P(+|D)</span>
-<div class="field-inline">
-<div class="range-wrap"><input class="range" id="sensRange" max="1" min="0" step="0.0005" type="range" value="0.95"/></div>
-<input class="input mono" id="sensInput" inputmode="decimal" value="0.95"/>
-</div>
-</label>
-<label class="field">
-<span class="field-label">Specificity P(-|¬D)</span>
-<div class="field-inline">
-<div class="range-wrap"><input class="range" id="specRange" max="1" min="0" step="0.0005" type="range" value="0.98"/></div>
-<input class="input mono" id="specInput" inputmode="decimal" value="0.98"/>
-</div>
-</label>
-<div class="field">
-<span class="field-label">Posterior after a positive: P(D|+)</span>
-<div aria-live="polite" class="result big" id="ppvOut"></div>
-<div class="small muted" id="ppvExplain"></div>
-</div>
-<div class="field">
-<span class="field-label">Posterior after a negative: P(D|-)</span>
-<div aria-live="polite" class="result big" id="pdnegOut"></div>
-<div class="small muted" id="pdnegExplain"></div>
-</div>
-</div>
-<div class="actions-row">
-<button class="btn" id="medicalToQuiz" type="button">Practice this in a quiz</button>
-<button class="btn ghost" id="medicalReset" type="button">Reset to common example</button>
-</div>
-<div class="divider"></div>
-<h3>Confusion matrix (expected counts)</h3>
-<p class="muted small">Assuming a population of <span class="mono">10,000</span>.</p>
-<div aria-label="Confusion matrix" class="matrix" role="table">
-<div class="matrix-head"></div>
-<div class="matrix-head">Test +</div>
-<div class="matrix-head">Test −</div>
-<div class="matrix-side">Disease</div>
-<div class="matrix-cell" id="tpCell"></div>
-<div class="matrix-cell" id="fnCell"></div>
-<div class="matrix-side">No disease</div>
-<div class="matrix-cell" id="fpCell"></div>
-<div class="matrix-cell" id="tnCell"></div>
-</div>
-</article>
-<aside class="card">
-<h2>Visual intuition</h2>
-<p class="muted">Bars show how your belief shifts after seeing evidence.</p>
-<div class="viz">
-<canvas aria-label="Chart showing prior and posterior for disease" class="canvas" height="420" id="medicalChart" width="720"></canvas>
-<div class="viz-legend">
-<div class="legend-item"><span class="swatch s1"></span>Prior</div>
-<div class="legend-item"><span class="swatch s2"></span>Posterior (after +)</div>
-</div>
-</div>
-<div class="divider"></div>
-<h3>Step-by-step Bayes</h3>
-<div aria-live="polite" class="steps" id="medicalSteps"></div>
-</aside>
-</div>
-</section>
-<section class="panel" data-panel="multi" id="panel-multi">
-<div class="grid-2">
-<article class="card">
-<h2>Multiple hypotheses (proper normalization)</h2>
-<p class="muted">Bayes with more than two hypotheses: priors + likelihoods → evidence P(E) → posterior distribution.</p>
-<div aria-label="Multi-hypothesis table" class="table-wrap" role="region">
-<table class="table" id="hypTable">
-<thead>
-<tr>
-<th>Hypothesis</th>
-<th class="num">Prior P(H)</th>
-<th class="num">Likelihood P(E|H)</th>
-<th class="num">Unnorm.</th>
-<th class="num">Posterior P(H|E)</th>
-<th></th>
-</tr>
-</thead>
-<tbody id="hypBody"></tbody>
-</table>
-</div>
-<div class="actions-row">
-<button class="btn" id="addHyp" type="button">Add hypothesis</button>
-<button class="btn ghost" id="loadExampleSpam" type="button">Load spam example</button>
-<button class="btn ghost" id="normalizePriors" type="button">Normalize priors</button>
-</div>
-<div class="divider"></div>
-<h3>Evidence term</h3>
-<div class="formula compact">
-<div class="mono" id="evidenceLine"></div>
-</div>
-<p class="muted small" id="evidenceValue"></p>
-</article>
-<aside class="card">
-<h2>Prior → Posterior</h2>
-<p class="muted">Compare before and after as a distribution.</p>
-<div class="viz">
-<canvas aria-label="Chart comparing priors and posteriors across hypotheses" class="canvas" height="420" id="multiChart" width="720"></canvas>
-<div class="viz-legend">
-<div class="legend-item"><span class="swatch s1"></span>Prior</div>
-<div class="legend-item"><span class="swatch s2"></span>Posterior</div>
-</div>
-</div>
-<div class="divider"></div>
-<h3>Quick interpretation</h3>
-<div aria-live="polite" class="steps" id="multiNarrative"></div>
-</aside>
-</div>
-</section>
-<section class="panel" data-panel="scenarios" id="panel-scenarios">
-<div class="grid-3">
-<article class="card scenario">
-<h2>Scenario: Rare disease screening</h2>
-<p class="muted">High accuracy does not guarantee high P(D|+).</p>
-<div class="scenario-meta">
-<div><span class="tag">Medical</span></div>
-<div class="mono small">P(D)=0.01, P(+|D)=0.95, P(-|¬D)=0.98</div>
-</div>
-<div class="actions-row">
-<button class="btn" data-scenario="medical-rare" type="button">Open in Medical Test</button>
-</div>
-</article>
-<article class="card scenario">
-<h2>Scenario: Spam filtering</h2>
-<p class="muted">A keyword is evidence; spam vs ham are hypotheses.</p>
-<div class="scenario-meta">
-<div><span class="tag">Multi</span></div>
-<div class="mono small">P(Spam)=0.20, P(Word|Spam)=0.60, P(Word|Ham)=0.05</div>
-</div>
-<div class="actions-row">
-<button class="btn" data-scenario="multi-spam" type="button">Open in Multi‑Hypothesis</button>
-</div>
-</article>
-<article class="card scenario">
-<h2>Scenario: Sensor reliability</h2>
-<p class="muted">The base rate dominates when events are rare.</p>
-<div class="scenario-meta">
-<div><span class="tag">Medical</span></div>
-<div class="mono small">P(Event)=0.002, P(+|Event)=0.99, P(-|¬Event)=0.97</div>
-</div>
-<div class="actions-row">
-<button class="btn" data-scenario="medical-sensor" type="button">Open in Medical Test</button>
-</div>
-</article>
-<article class="card scenario">
-<h2>Scenario: Coin bias</h2>
-<p class="muted">Evidence shifts mass between “fair” and “biased”.</p>
-<div class="scenario-meta">
-<div><span class="tag">Multi</span></div>
-<div class="mono small">Fair vs Biased, E = “10 heads in 10 flips”</div>
-</div>
-<div class="actions-row">
-<button class="btn" data-scenario="multi-coin" type="button">Open in Multi‑Hypothesis</button>
-</div>
-</article>
-<article class="card scenario">
-<h2>Scenario: Legal evidence</h2>
-<p class="muted">Be careful: Bayes does not replace legal reasoning.</p>
-<div class="scenario-meta">
-<div><span class="tag">Tools</span></div>
-<div class="mono small">Prior odds × Bayes factor → posterior odds</div>
-</div>
-<div class="actions-row">
-<button class="btn" data-tab-jump="tools" type="button">Open Odds &amp; Bayes Factor</button>
-</div>
-</article>
-<article class="card scenario">
-<h2>Scenario: Weather forecast calibration</h2>
-<p class="muted">Bayes helps update model beliefs using new observations.</p>
-<div class="scenario-meta">
-<div><span class="tag">Learn</span></div>
-<div class="mono small">H = model A/B, E = observed pattern</div>
-</div>
-<div class="actions-row">
-<button class="btn" data-tab-jump="learn" type="button">Back to Learn</button>
-</div>
-</article>
-</div>
-</section>
-<section class="panel" data-panel="quiz" id="panel-quiz">
-<div class="grid-2">
-<article class="card">
-<h2>Quiz (with feedback)</h2>
-<p class="muted">Answer, get immediate correction, and earn score. Difficulty adapts.</p>
-<div class="quiz">
-<div class="quiz-top">
-<div class="pill">
-<span class="pill-label">Difficulty</span>
-<span class="pill-value" id="diffValue">2</span>
-</div>
-<div class="pill">
-<span class="pill-label">Streak</span>
-<span class="pill-value" id="streakValue">0</span>
-</div>
-</div>
-<div aria-live="polite" class="quiz-q" id="quizQuestion"></div>
-<div class="quiz-answers" id="quizAnswers"></div>
-<div class="quiz-actions">
-<button class="btn" id="quizNext" type="button">Next</button>
-<button class="btn ghost" id="quizHint" type="button">Hint</button>
-</div>
-<div aria-live="polite" class="quiz-feedback" id="quizFeedback"></div>
-</div>
-</article>
-<aside class="card">
-<h2>What you’re practicing</h2>
-<div class="steps" id="quizExplain"></div>
-<div class="divider"></div>
-<h3>Targets</h3>
-<ul class="list">
-<li>Distinguish <span class="mono">P(E|H)</span> vs <span class="mono">P(H|E)</span></li>
-<li>Compute posterior from base rate + test accuracy</li>
-<li>Normalize multiple hypotheses correctly</li>
-<li>Use odds and Bayes factors</li>
-</ul>
-</aside>
-</div>
-</section>
-<section class="panel" data-panel="tutor" id="panel-tutor">
-<div class="grid-2">
-<article class="card">
-<h2>Tutor (offline) — ask and practice</h2>
-<p class="muted">Ask questions like “Explain prior vs likelihood”, “Why base rates matter”, or “Solve this with my current numbers”. The tutor uses built‑in rules (no external APIs).</p>
-<div aria-label="Tutor chat" class="chat">
-<div aria-live="polite" class="chat-log" id="chatLog"></div>
-<div class="chat-row">
-<input class="input" id="chatInput" placeholder="Ask: 'Explain prior', 'Compute P(D|+)', 'Give me a practice problem'…"/>
-<button class="btn" id="chatSend" type="button">Send</button>
-</div>
-<div aria-label="Suggested prompts" class="chips">
-<button class="chip" data-chip="Explain Bayes in simple terms" type="button">Explain Bayes simply</button>
-<button class="chip" data-chip="What is the base rate fallacy?" type="button">Base rate fallacy</button>
-<button class="chip" data-chip="Explain the medical calculator using current values" type="button">Explain medical now</button>
-<button class="chip" data-chip="Give me a practice problem (medical)" type="button">Practice: medical</button>
-<button class="chip" data-chip="Give me a practice problem (multi)" type="button">Practice: multi</button>
+        </aside>
+      </div>
+    </section>
+    <section class="panel" data-panel="medical" id="panel-medical">
+      <div class="grid-2">
+        <article class="card">
+          <h2>Medical test Bayes (PPV/NPV)</h2>
+          <p class="muted">Enter prevalence, sensitivity, and specificity. You’ll get P(D|+) and P(D|−), plus a
+            frequency table for 10,000 people.</p>
+          <div class="form-grid">
+            <label class="field">
+              <span class="field-label">Prevalence (prior) P(D)</span>
+              <div class="field-inline">
+                <div class="range-wrap"><input class="range" id="prevRange" max="1" min="0" step="0.0005" type="range"
+                    value="0.01" /></div>
+                <input class="input mono" id="prevInput" inputmode="decimal" value="0.01" />
+              </div>
+            </label>
+            <label class="field">
+              <span class="field-label">Sensitivity P(+|D)</span>
+              <div class="field-inline">
+                <div class="range-wrap"><input class="range" id="sensRange" max="1" min="0" step="0.0005" type="range"
+                    value="0.95" /></div>
+                <input class="input mono" id="sensInput" inputmode="decimal" value="0.95" />
+              </div>
+            </label>
+            <label class="field">
+              <span class="field-label">Specificity P(-|¬D)</span>
+              <div class="field-inline">
+                <div class="range-wrap"><input class="range" id="specRange" max="1" min="0" step="0.0005" type="range"
+                    value="0.98" /></div>
+                <input class="input mono" id="specInput" inputmode="decimal" value="0.98" />
+              </div>
+            </label>
+            <div class="field">
+              <span class="field-label">Posterior after a positive: P(D|+)</span>
+              <div aria-live="polite" class="result big" id="ppvOut"></div>
+              <div class="small muted" id="ppvExplain"></div>
+            </div>
+            <div class="field">
+              <span class="field-label">Posterior after a negative: P(D|-)</span>
+              <div aria-live="polite" class="result big" id="pdnegOut"></div>
+              <div class="small muted" id="pdnegExplain"></div>
+            </div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" id="medicalToQuiz" type="button">Practice this in a quiz</button>
+            <button class="btn ghost" id="medicalReset" type="button">Reset to common example</button>
+          </div>
+          <div class="divider"></div>
+          <h3>Confusion matrix (expected counts)</h3>
+          <p class="muted small">Assuming a population of <span class="mono">10,000</span>.</p>
+          <div aria-label="Confusion matrix" class="matrix" role="table">
+            <div class="matrix-head"></div>
+            <div class="matrix-head">Test +</div>
+            <div class="matrix-head">Test −</div>
+            <div class="matrix-side">Disease</div>
+            <div class="matrix-cell" id="tpCell"></div>
+            <div class="matrix-cell" id="fnCell"></div>
+            <div class="matrix-side">No disease</div>
+            <div class="matrix-cell" id="fpCell"></div>
+            <div class="matrix-cell" id="tnCell"></div>
+          </div>
+        </article>
+        <aside class="card">
+          <h2>Visual intuition</h2>
+          <p class="muted">Bars show how your belief shifts after seeing evidence.</p>
+          <div class="viz">
+            <canvas aria-label="Chart showing prior and posterior for disease" class="canvas" height="420"
+              id="medicalChart" width="720">Bar chart comparing prior probability and posterior probability (PPV) for the medical test scenario.</canvas>
+            <div class="viz-legend">
+              <div class="legend-item"><span class="swatch s1"></span>Prior</div>
+              <div class="legend-item"><span class="swatch s2"></span>Posterior (after +)</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3>Step-by-step Bayes</h3>
+          <div aria-live="polite" class="steps" id="medicalSteps"></div>
+        </aside>
+      </div>
+    </section>
+    <section class="panel" data-panel="multi" id="panel-multi">
+      <div class="grid-2">
+        <article class="card">
+          <h2>Multiple hypotheses (proper normalization)</h2>
+          <p class="muted">Bayes with more than two hypotheses: priors + likelihoods → evidence P(E) → posterior
+            distribution.</p>
+          <div aria-label="Multi-hypothesis table" class="table-wrap" role="region">
+            <table class="table" id="hypTable">
+              <thead>
+                <tr>
+                  <th>Hypothesis</th>
+                  <th class="num">Prior P(H)</th>
+                  <th class="num">Likelihood P(E|H)</th>
+                  <th class="num">Unnorm.</th>
+                  <th class="num">Posterior P(H|E)</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="hypBody"></tbody>
+            </table>
+          </div>
+          <div class="actions-row">
+            <button class="btn" id="addHyp" type="button">Add hypothesis</button>
+            <button class="btn ghost" id="loadExampleSpam" type="button">Load spam example</button>
+            <button class="btn ghost" id="normalizePriors" type="button">Normalize priors</button>
+          </div>
+          <div class="divider"></div>
+          <h3>Evidence term</h3>
+          <div class="formula compact">
+            <div class="mono" id="evidenceLine"></div>
+          </div>
+          <p class="muted small" id="evidenceValue"></p>
+        </article>
+        <aside class="card">
+          <h2>Prior → Posterior</h2>
+          <p class="muted">Compare before and after as a distribution.</p>
+          <div class="viz">
+            <canvas aria-label="Chart comparing priors and posteriors across hypotheses" class="canvas" height="420"
+              id="multiChart" width="720">Bar chart comparing prior and posterior probability distributions across all hypotheses.</canvas>
+            <div class="viz-legend">
+              <div class="legend-item"><span class="swatch s1"></span>Prior</div>
+              <div class="legend-item"><span class="swatch s2"></span>Posterior</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3>Quick interpretation</h3>
+          <div aria-live="polite" class="steps" id="multiNarrative"></div>
+        </aside>
+      </div>
+    </section>
+    <section class="panel" data-panel="scenarios" id="panel-scenarios">
+      <div class="grid-3">
+        <article class="card scenario">
+          <h2>Scenario: Rare disease screening</h2>
+          <p class="muted">High accuracy does not guarantee high P(D|+).</p>
+          <div class="scenario-meta">
+            <div><span class="tag">Medical</span></div>
+            <div class="mono small">P(D)=0.01, P(+|D)=0.95, P(-|¬D)=0.98</div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-scenario="medical-rare" type="button">Open in Medical Test</button>
+          </div>
+        </article>
+        <article class="card scenario">
+          <h2>Scenario: Spam filtering</h2>
+          <p class="muted">A keyword is evidence; spam vs ham are hypotheses.</p>
+          <div class="scenario-meta">
+            <div><span class="tag">Multi</span></div>
+            <div class="mono small">P(Spam)=0.20, P(Word|Spam)=0.60, P(Word|Ham)=0.05</div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-scenario="multi-spam" type="button">Open in Multi‑Hypothesis</button>
+          </div>
+        </article>
+        <article class="card scenario">
+          <h2>Scenario: Sensor reliability</h2>
+          <p class="muted">The base rate dominates when events are rare.</p>
+          <div class="scenario-meta">
+            <div><span class="tag">Medical</span></div>
+            <div class="mono small">P(Event)=0.002, P(+|Event)=0.99, P(-|¬Event)=0.97</div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-scenario="medical-sensor" type="button">Open in Medical Test</button>
+          </div>
+        </article>
+        <article class="card scenario">
+          <h2>Scenario: Coin bias</h2>
+          <p class="muted">Evidence shifts mass between “fair” and “biased”.</p>
+          <div class="scenario-meta">
+            <div><span class="tag">Multi</span></div>
+            <div class="mono small">Fair vs Biased, E = “10 heads in 10 flips”</div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-scenario="multi-coin" type="button">Open in Multi‑Hypothesis</button>
+          </div>
+        </article>
+        <article class="card scenario">
+          <h2>Scenario: Legal evidence</h2>
+          <p class="muted">Be careful: Bayes does not replace legal reasoning.</p>
+          <div class="scenario-meta">
+            <div><span class="tag">Tools</span></div>
+            <div class="mono small">Prior odds × Bayes factor → posterior odds</div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-tab-jump="tools" type="button">Open Odds &amp; Bayes Factor</button>
+          </div>
+        </article>
+        <article class="card scenario">
+          <h2>Scenario: Weather forecast calibration</h2>
+          <p class="muted">Bayes helps update model beliefs using new observations.</p>
+          <div class="scenario-meta">
+            <div><span class="tag">Learn</span></div>
+            <div class="mono small">H = model A/B, E = observed pattern</div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-tab-jump="learn" type="button">Back to Learn</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="panel" data-panel="quiz" id="panel-quiz">
+      <div class="grid-2">
+        <article class="card">
+          <h2>Quiz (with feedback)</h2>
+          <p class="muted">Answer, get immediate correction, and earn score. Difficulty adapts.</p>
+          <div class="quiz">
+            <div class="quiz-top">
+              <div class="pill">
+                <span class="pill-label">Difficulty</span>
+                <span class="pill-value" id="diffValue">2</span>
+              </div>
+              <div class="pill">
+                <span class="pill-label">Streak</span>
+                <span class="pill-value" id="streakValue">0</span>
+              </div>
+            </div>
+            <div aria-live="polite" class="quiz-q" id="quizQuestion"></div>
+            <div class="quiz-answers" id="quizAnswers"></div>
+            <div class="quiz-actions">
+              <button class="btn" id="quizNext" type="button">Next</button>
+              <button class="btn ghost" id="quizHint" type="button">Hint</button>
+            </div>
+            <div aria-live="polite" class="quiz-feedback" id="quizFeedback"></div>
+          </div>
+        </article>
+        <aside class="card">
+          <h2>What you’re practicing</h2>
+          <div class="steps" id="quizExplain"></div>
+          <div class="divider"></div>
+          <h3>Targets</h3>
+          <ul class="list">
+            <li>Distinguish <span class="mono">P(E|H)</span> vs <span class="mono">P(H|E)</span></li>
+            <li>Compute posterior from base rate + test accuracy</li>
+            <li>Normalize multiple hypotheses correctly</li>
+            <li>Use odds and Bayes factors</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    <section class="panel" data-panel="tutor" id="panel-tutor">
+      <div class="grid-2">
+        <article class="card">
+          <h2>Tutor (offline) — ask and practice</h2>
+          <p class="muted">Ask questions like “Explain prior vs likelihood”, “Why base rates matter”, or “Solve this
+            with my current numbers”. The tutor uses built‑in rules (no external APIs).</p>
+          <div aria-label="Tutor chat" class="chat">
+            <div aria-live="polite" class="chat-log" id="chatLog"></div>
+            <div class="chat-row">
+              <input class="input" id="chatInput"
+                placeholder="Ask: 'Explain prior', 'Compute P(D|+)', 'Give me a practice problem'…" />
+              <button class="btn" id="chatSend" type="button">Send</button>
+            </div>
+            <div aria-label="Suggested prompts" class="chips">
+              <button class="chip" data-chip="Explain Bayes in simple terms" type="button">Explain Bayes simply</button>
+              <button class="chip" data-chip="What is the base rate fallacy?" type="button">Base rate fallacy</button>
+              <button class="chip" data-chip="Explain the medical calculator using current values" type="button">Explain
+                medical now</button>
+              <button class="chip" data-chip="Give me a practice problem (medical)" type="button">Practice:
+                medical</button>
+              <button class="chip" data-chip="Give me a practice problem (multi)" type="button">Practice: multi</button>
 
-<button class="chip" data-chip="Explain PPV vs sensitivity vs specificity" type="button">PPV vs sensitivity</button>
-<button class="chip" data-chip="Show me the odds form of Bayes (with Bayes factor)" type="button">Odds form</button>
-<button class="chip" data-chip="Why do false positives happen?" type="button">False positives</button>
-<button class="chip" data-chip="Give me a practice problem (base rate trap)" type="button">Practice: base rate</button>
-<button class="chip" data-chip="/clear" type="button">Clear chat</button></div>
-</div>
-</article>
-<aside class="card">
-<h2>Live context</h2>
-<p class="muted">The tutor can reference your current inputs.</p>
-<div class="context">
-<div class="context-row">
-<div class="context-k">Medical</div>
-<div class="context-v mono" id="ctxMedical"></div>
-</div>
-<div class="context-row">
-<div class="context-k">Multi</div>
-<div class="context-v mono" id="ctxMulti"></div>
-</div>
-</div>
-<div class="divider"></div>
-<h3>Self‑tests</h3>
-<p class="muted small">
+              <button class="chip" data-chip="Explain PPV vs sensitivity vs specificity" type="button">PPV vs
+                sensitivity</button>
+              <button class="chip" data-chip="Show me the odds form of Bayes (with Bayes factor)" type="button">Odds
+                form</button>
+              <button class="chip" data-chip="Why do false positives happen?" type="button">False positives</button>
+              <button class="chip" data-chip="Give me a practice problem (base rate trap)" type="button">Practice: base
+                rate</button>
+              <button class="chip" data-chip="/clear" type="button">Clear chat</button>
+            </div>
+          </div>
+        </article>
+        <aside class="card">
+          <h2>Live context</h2>
+          <p class="muted">The tutor can reference your current inputs.</p>
+          <div class="context">
+            <div class="context-row">
+              <div class="context-k">Medical</div>
+              <div class="context-v mono" id="ctxMedical"></div>
+            </div>
+            <div class="context-row">
+              <div class="context-k">Multi</div>
+              <div class="context-v mono" id="ctxMulti"></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3>Self‑tests</h3>
+          <p class="muted small">
             On load, the app runs internal numeric checks against known Bayes identities and example values.
           </p>
-<div aria-live="polite" class="result" id="selfTestOut"></div>
-</aside>
-</div>
-</section>
-<section class="panel" data-panel="tools" id="panel-tools">
-<div class="grid-2">
-<article class="card">
-<h2>Tools — calculator and converters</h2>
-<p class="muted">
+          <div aria-live="polite" class="result" id="selfTestOut"></div>
+        </aside>
+      </div>
+    </section>
+    <section class="panel" data-panel="tools" id="panel-tools">
+      <div class="grid-2">
+        <article class="card">
+          <h2>Tools — calculator and converters</h2>
+          <p class="muted">
             Bayes is especially clean in odds form:
             <span class="mono">Posterior odds = Prior odds × Bayes factor</span>.
           </p>
-<div class="form-grid">
-<label class="field">
-<span class="field-label">Prior probability P(H)</span>
-<input class="input mono" id="oddsPrior" inputmode="decimal" value="0.10"/>
-</label>
-<label class="field">
-<span class="field-label">Bayes factor BF = P(E|H)/P(E|¬H)</span>
-<input class="input mono" id="oddsBF" inputmode="decimal" value="5"/>
-</label>
-<div class="field">
-<span class="field-label">Posterior probability P(H|E)</span>
-<div aria-live="polite" class="result big" id="oddsPosterior"></div>
-<div class="small muted" id="oddsExplain"></div>
-</div>
-</div>
-<div class="divider"></div>
-<h3>Safe calculator</h3>
-<p class="muted small">Supports + − × ÷, parentheses, exponentiation, constants and a few functions.</p>
-<div class="calc">
-<input class="input mono" id="calcExpr" placeholder="Example: (0.95*0.01)/((0.95*0.01)+(0.02*0.99))"/>
-<div class="calc-row">
-<button class="btn" id="calcEval" type="button">Evaluate</button>
-<button class="btn ghost" id="calcClear" type="button">Clear</button>
-</div>
-<div aria-live="polite" class="result" id="calcOut"></div>
-<div class="small muted" id="calcHelp"></div>
-</div>
-</article>
-<aside class="card">
-<h2>Converters</h2>
-<div class="form-grid">
-<label class="field">
-<span class="field-label">Probability p</span>
-<input class="input mono" id="convP" inputmode="decimal" value="0.20"/>
-</label>
-<div class="field">
-<span class="field-label">Odds p/(1−p)</span>
-<div class="result" id="convOdds"></div>
-</div>
-<div class="field">
-<span class="field-label">Log‑odds ln(odds)</span>
-<div class="result" id="convLogOdds"></div>
-</div>
-<label class="field">
-<span class="field-label">Odds</span>
-<input class="input mono" id="convOddsIn" inputmode="decimal" value="0.25"/>
-</label>
-<div class="field">
-<span class="field-label">Probability odds/(1+odds)</span>
-<div class="result" id="convPOut"></div>
-</div>
-</div>
-<div class="divider"></div>
-<h3>Notes</h3>
-<ul class="list small muted">
-<li>Keep probabilities in [0,1].</li>
-<li>BF &gt; 1 supports H; BF &lt; 1 supports ¬H.</li>
-<li>Odds form is numerically stable when probabilities are tiny.</li>
-</ul>
-</aside>
-</div>
-</section>
-</main>
-<footer class="footer" role="contentinfo">
-  <div class="container footer-inner">
-    <div class="footer-left">
-      <div class="footer-brand">Bayes Lab</div>
-      <div class="footer-meta"><span id="copyYear"></span>  © 2025 querosdev · Bayes Lab  
-  Licensed under CC BY-NC-ND 4.0  </div>
+          <div class="form-grid">
+            <label class="field">
+              <span class="field-label">Prior probability P(H)</span>
+              <input class="input mono" id="oddsPrior" inputmode="decimal" value="0.10" />
+            </label>
+            <label class="field">
+              <span class="field-label">Bayes factor BF = P(E|H)/P(E|¬H)</span>
+              <input class="input mono" id="oddsBF" inputmode="decimal" value="5" />
+            </label>
+            <div class="field">
+              <span class="field-label">Posterior probability P(H|E)</span>
+              <div aria-live="polite" class="result big" id="oddsPosterior"></div>
+              <div class="small muted" id="oddsExplain"></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3>Safe calculator</h3>
+          <p class="muted small">Supports + − × ÷, parentheses, exponentiation, constants and a few functions.</p>
+          <div class="calc">
+            <input class="input mono" id="calcExpr" placeholder="Example: (0.95*0.01)/((0.95*0.01)+(0.02*0.99))" />
+            <div class="calc-row">
+              <button class="btn" id="calcEval" type="button">Evaluate</button>
+              <button class="btn ghost" id="calcClear" type="button">Clear</button>
+            </div>
+            <div aria-live="polite" class="result" id="calcOut"></div>
+            <div class="small muted" id="calcHelp"></div>
+          </div>
+        </article>
+        <aside class="card">
+          <h2>Converters</h2>
+          <div class="form-grid">
+            <label class="field">
+              <span class="field-label">Probability p</span>
+              <input class="input mono" id="convP" inputmode="decimal" value="0.20" />
+            </label>
+            <div class="field">
+              <span class="field-label">Odds p/(1−p)</span>
+              <div class="result" id="convOdds"></div>
+            </div>
+            <div class="field">
+              <span class="field-label">Log‑odds ln(odds)</span>
+              <div class="result" id="convLogOdds"></div>
+            </div>
+            <label class="field">
+              <span class="field-label">Odds</span>
+              <input class="input mono" id="convOddsIn" inputmode="decimal" value="0.25" />
+            </label>
+            <div class="field">
+              <span class="field-label">Probability odds/(1+odds)</span>
+              <div class="result" id="convPOut"></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3>Notes</h3>
+          <ul class="list small muted">
+            <li>Keep probabilities in [0,1].</li>
+            <li>BF &gt; 1 supports H; BF &lt; 1 supports ¬H.</li>
+            <li>Odds form is numerically stable when probabilities are tiny.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="footer-brand">Bayes Lab</div>
+        <div class="footer-meta"><span id="copyYear"></span> © querosdev · Bayes Lab
+          Licensed under CC BY-NC-ND 4.0 </div>
+      </div>
+      <div class="footer-right">
+        <button class="link-btn" id="openPrivacy" type="button">Privacy</button>
+        <button class="link-btn" id="openTerms" type="button">Copyright</button>
+      </div>
     </div>
-    <div class="footer-right">
-      <button class="link-btn" id="openPrivacy" type="button">Privacy</button>
-      <button class="link-btn" id="openTerms" type="button">Copyright</button>
+  </footer>
+
+  <div class="privacy-banner" id="privacyBanner" role="region" aria-label="Privacy notice" hidden>
+    <div class="privacy-inner container">
+      <div class="privacy-text">
+        <div class="privacy-title">Privacy notice</div>
+        <div class="privacy-body">This site stores your preferences (theme, motion, decimals) in your browser using
+          local storage. It does not use tracking cookies or analytics.</div>
+      </div>
+      <div class="privacy-actions">
+        <button class="btn ghost sm" id="privacyClear" type="button">Clear saved data</button>
+        <button class="btn sm" id="privacyMore" type="button">Learn more</button>
+        <button class="btn primary sm" id="privacyOk" type="button">OK</button>
+      </div>
     </div>
   </div>
-</footer>
 
-<div class="privacy-banner" id="privacyBanner" role="region" aria-label="Privacy notice" hidden>
-  <div class="privacy-inner container">
-    <div class="privacy-text">
-      <div class="privacy-title">Privacy notice</div>
-      <div class="privacy-body">This site stores your preferences (theme, motion, decimals) in your browser using local storage. It does not use tracking cookies or analytics.</div>
-    </div>
-    <div class="privacy-actions">
-      <button class="btn ghost sm" id="privacyClear" type="button">Clear saved data</button>
-      <button class="btn sm" id="privacyMore" type="button">Learn more</button>
-      <button class="btn primary sm" id="privacyOk" type="button">OK</button>
-    </div>
-  </div>
-</div>
+  <dialog aria-label="Privacy" class="dialog" id="privacyDialog">
+    <form class="dialog-inner" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <div class="dialog-title">Privacy</div>
+          <div class="dialog-subtitle">What is stored, and why.</div>
+        </div>
+        <button aria-label="Close privacy" class="icon-btn" type="submit" value="close"><span
+            aria-hidden="true">Close</span></button>
+      </div>
+      <div class="dialog-body">
+        <div class="note">
+          <div class="note-title">Local storage</div>
+          <div class="note-body">Bayes Lab saves a few preferences locally so the app feels consistent when you return:
+            theme, motion setting, decimals, and your quiz score. This data never leaves your device unless you export
+            it yourself.</div>
+        </div>
+        <div class="note">
+          <div class="note-title">No tracking cookies</div>
+          <div class="note-body">This site does not set tracking cookies and does not include analytics. If you are
+            online, the page may load fonts from Google Fonts, which may receive your IP address as part of normal web
+            requests.</div>
+        </div>
+        <div class="note">
+          <div class="note-title">Control</div>
+          <div class="note-body">You can clear saved data using the button below. Your learning tools will keep working.
+          </div>
+        </div>
+        <div class="row" style="justify-content:flex-end; gap:10px">
+          <button class="btn ghost" id="privacyClear2" type="button">Clear saved data</button>
+          <button class="btn primary" type="submit" value="close">Close</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
 
-<dialog aria-label="Privacy" class="dialog" id="privacyDialog">
-  <form class="dialog-inner" method="dialog">
-    <div class="dialog-head">
-      <div>
-        <div class="dialog-title">Privacy</div>
-        <div class="dialog-subtitle">What is stored, and why.</div>
+  <dialog aria-label="Copyright" class="dialog" id="termsDialog">
+    <form class="dialog-inner" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <div class="dialog-title">Copyright</div>
+          <div class="dialog-subtitle">Ownership and permitted use.</div>
+        </div>
+        <button aria-label="Close copyright" class="icon-btn" type="submit" value="close"><span
+            aria-hidden="true">Close</span></button>
       </div>
-      <button aria-label="Close privacy" class="icon-btn" type="submit" value="close"><span aria-hidden="true">Close</span></button>
-    </div>
-    <div class="dialog-body">
-      <div class="note">
-        <div class="note-title">Local storage</div>
-        <div class="note-body">Bayes Lab saves a few preferences locally so the app feels consistent when you return: theme, motion setting, decimals, and your quiz score. This data never leaves your device unless you export it yourself.</div>
+      <div class="dialog-body">
+        <div class="note">
+          <div class="note-title">All rights reserved</div>
+          <div class="note-body">This website’s design, text, and code are provided by the owner. Copying,
+            redistributing, or reusing substantial parts without permission is not allowed.</div>
+        </div>
+        <div class="note">
+          <div class="note-title">Practical note</div>
+          <div class="note-body">No technical measure can fully prevent copying on the web. A clear copyright notice
+            helps set expectations and supports enforcement if needed.</div>
+        </div>
+        <div class="row" style="justify-content:flex-end">
+          <button class="btn primary" type="submit" value="close">Close</button>
+        </div>
       </div>
-      <div class="note">
-        <div class="note-title">No tracking cookies</div>
-        <div class="note-body">This site does not set tracking cookies and does not include analytics. If you are online, the page may load fonts from Google Fonts, which may receive your IP address as part of normal web requests.</div>
-      </div>
-      <div class="note">
-        <div class="note-title">Control</div>
-        <div class="note-body">You can clear saved data using the button below. Your learning tools will keep working.</div>
-      </div>
-      <div class="row" style="justify-content:flex-end; gap:10px">
-        <button class="btn ghost" id="privacyClear2" type="button">Clear saved data</button>
-        <button class="btn primary" type="submit" value="close">Close</button>
-      </div>
-    </div>
-  </form>
-</dialog>
+    </form>
+  </dialog>
 
-<dialog aria-label="Copyright" class="dialog" id="termsDialog">
-  <form class="dialog-inner" method="dialog">
-    <div class="dialog-head">
-      <div>
-        <div class="dialog-title">Copyright</div>
-        <div class="dialog-subtitle">Ownership and permitted use.</div>
+  <dialog aria-label="Settings" class="dialog" id="settingsDialog">
+    <form class="dialog-inner" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <div class="dialog-title">Settings</div>
+          <div class="dialog-subtitle">Appearance, motion, and formatting.</div>
+        </div>
+        <button aria-label="Close settings" class="icon-btn" type="submit" value="close"><span
+            aria-hidden="true">Close</span></button>
       </div>
-      <button aria-label="Close copyright" class="icon-btn" type="submit" value="close"><span aria-hidden="true">Close</span></button>
-    </div>
-    <div class="dialog-body">
-      <div class="note">
-        <div class="note-title">All rights reserved</div>
-        <div class="note-body">This website’s design, text, and code are provided by the owner. Copying, redistributing, or reusing substantial parts without permission is not allowed.</div>
-      </div>
-      <div class="note">
-        <div class="note-title">Practical note</div>
-        <div class="note-body">No technical measure can fully prevent copying on the web. A clear copyright notice helps set expectations and supports enforcement if needed.</div>
-      </div>
-      <div class="row" style="justify-content:flex-end">
-        <button class="btn primary" type="submit" value="close">Close</button>
-      </div>
-    </div>
-  </form>
-</dialog>
-
-<dialog aria-label="Settings" class="dialog" id="settingsDialog">
-<form class="dialog-inner" method="dialog">
-<div class="dialog-head">
-<div>
-<div class="dialog-title">Settings</div>
-<div class="dialog-subtitle">Appearance, motion, and formatting.</div>
-</div>
-<button aria-label="Close settings" class="icon-btn" type="submit" value="close"><span aria-hidden="true">Close</span></button>
-</div>
-<div class="dialog-body">
-<div class="form-grid">
-<label class="field">
-<span class="field-label">Theme</span>
-<select class="select" id="themeSelect">
-<option value="midnight">Midnight</option>
-<option value="ember">Ember</option>
-<option value="paper">Paper</option>
-<option value="andromeda">Andromeda</option>
-<option value="dracula">Dracula</option>
-<option value="solar">Solar</option>
-</select>
-</label>
-<label class="field">
-<span class="field-label">Decimals</span>
-<select class="select" id="decSelect">
-<option value="2">2</option>
-<option value="3">3</option>
-<option selected="" value="4">4</option>
-<option value="6">6</option>
-</select>
-</label>
-<label class="field">
-<span class="field-label">Motion</span>
-<select class="select" id="motionSelect">
-<option value="auto">Auto</option>
-<option value="on">On</option>
-<option value="reduced">Reduced</option>
-</select>
-</label>
-<label class="field">
-<span class="field-label">Reset</span>
-<button class="btn danger" id="resetAll" type="button">Reset all data</button>
-</label>
-</div>
-<div class="divider"></div>
-<div class="small muted">
+      <div class="dialog-body">
+        <div class="form-grid">
+          <label class="field">
+            <span class="field-label">Theme</span>
+            <select class="select" id="themeSelect">
+              <option value="midnight">Midnight</option>
+              <option value="ember">Ember</option>
+              <option value="paper">Paper</option>
+              <option value="andromeda">Andromeda</option>
+              <option value="dracula">Dracula</option>
+              <option value="solar">Solar</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Decimals</span>
+            <select class="select" id="decSelect">
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option selected="" value="4">4</option>
+              <option value="6">6</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Motion</span>
+            <select class="select" id="motionSelect">
+              <option value="auto">Auto</option>
+              <option value="on">On</option>
+              <option value="reduced">Reduced</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Reset</span>
+            <button class="btn danger" id="resetAll" type="button">Reset all data</button>
+          </label>
+        </div>
+        <div class="divider"></div>
+        <div class="small muted">
           Tip: use the calculators as “Bayes engines” for real scenarios. The Quiz and Tutor read the same state.
         </div>
-</div>
-</form>
-</dialog>
-<div aria-atomic="true" aria-live="polite" class="toast" id="toast" role="status"></div>
-<script src="./script.js"></script>
+      </div>
+    </form>
+  </dialog>
+  <div aria-atomic="true" aria-live="polite" class="toast" id="toast" role="status"></div>
+  <script src="./script.js"></script>
 </body>
+
 </html>

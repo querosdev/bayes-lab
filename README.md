@@ -1,6 +1,6 @@
-# Bayes Lab
+# Bayes Lab 
 
-**Bayes Lab** is a clean, privacy-friendly, interactive laboratory for learning
+**Bayes Lab** is a clean, friendly, interactive laboratory for learning
 Bayesian probability and reasoning.
 
 It is designed as an educational and research-oriented tool, focused on
@@ -31,7 +31,7 @@ clarity, intuition, and correct mathematical foundations.
 
 ---
 
-## 🔐 Privacy
+## 🔐 Privacy (When using website because Bayes Lab is Open-source so you can use it offline)
 
 Bayes Lab:
 - does **not** use tracking cookies

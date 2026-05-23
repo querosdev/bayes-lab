@@ -20,6 +20,8 @@
   --ring: 0 0 0 3px rgba(var(--accent-rgb), .26);
   --trans: 160ms cubic-bezier(.2,.8,.2,1);
   --trans-slow: 260ms cubic-bezier(.2,.8,.2,1);
+
+.container{max-width:var(--container); margin:0 auto; padding:0 16px}
 }
 
 body[data-theme="midnight"]{
@@ -435,7 +437,7 @@ textarea{min-height:96px; resize:vertical}
   align-items:baseline;
   gap:14px;
 }
-.big{font-size:22px; font-weight:950; letter-spacing:-0.02em}
+.big{font-size:22px; font-weight:900; letter-spacing:-0.02em}
 .num{font-variant-numeric:tabular-nums}
 
 .callout{
@@ -445,7 +447,7 @@ textarea{min-height:96px; resize:vertical}
   padding:14px 16px;
   margin:14px 0;
 }
-.callout-title{font-weight:950; letter-spacing:-0.02em; margin-bottom:6px}
+.callout-title{font-weight:900; letter-spacing:-0.02em; margin-bottom:6px}
 .callout-body{color:var(--muted)}
 .list{margin:10px 0 0; padding-left:18px}
 .list li{margin:6px 0}
@@ -469,7 +471,7 @@ textarea{min-height:96px; resize:vertical}
 @media (max-width:520px){.matrix{grid-template-columns:1fr}}
 .matrix-head, .matrix-side{
   font-size:12px;
-  font-weight:950;
+  font-weight:900;
   color:var(--muted);
   text-transform:uppercase;
   letter-spacing:.02em;
@@ -481,7 +483,7 @@ textarea{min-height:96px; resize:vertical}
   border:var(--border-w) solid var(--border);
   background:var(--surface-2);
 }
-.matrix-cell .v{font-size:18px; font-weight:950}
+.matrix-cell .v{font-size:18px; font-weight:900}
 .matrix-cell .k{font-size:12px; color:var(--muted); font-weight:900; margin-top:2px}
 
 .viz{display:flex; flex-direction:column; gap:14px}
@@ -556,7 +558,7 @@ textarea{min-height:96px; resize:vertical}
   padding-bottom:12px;
   border-bottom:var(--border-w) solid var(--border);
 }
-.dialog-title{font-weight:950; font-size:16px}
+.dialog-title{font-weight:900; font-size:16px}
 .dialog-subtitle{color:var(--muted); font-size:13px; margin-top:2px}
 .dialog-body{padding-top:14px}
 .form-grid{display:grid; gap:14px; grid-template-columns:repeat(2, minmax(0,1fr))}
@@ -616,12 +618,12 @@ textarea{min-height:96px; resize:vertical}
   padding:12px 14px;
 }
 .context-row{display:flex; gap:10px; align-items:baseline; padding:6px 0}
-.context-k{width:72px; font-size:12px; font-weight:950; color:var(--muted)}
+.context-k{width:72px; font-size:12px; font-weight:900; color:var(--muted)}
 .context-v{flex:1; overflow-wrap:anywhere}
 
 .quiz{display:flex; flex-direction:column; gap:12px}
 .quiz-top{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
-.quiz-q{font-weight:950; letter-spacing:-0.02em}
+.quiz-q{font-weight:900; letter-spacing:-0.02em}
 .quiz-answers{display:grid; gap:10px}
 .quiz-answers .btn{justify-content:flex-start; text-align:left}
 .quiz-feedback{
@@ -757,7 +759,7 @@ textarea{min-height:96px; resize:vertical}
   gap:18px;
 }
 .footer-brand{
-  font-weight:1000;
+  font-weight:900;
   letter-spacing:-0.02em;
 }
 .footer-meta{color:var(--muted); font-size:13px}
@@ -782,7 +784,7 @@ body[data-theme="paper"] .privacy-banner{
   justify-content:space-between;
   gap:16px;
 }
-.privacy-title{font-weight:1000; font-size:14px}
+.privacy-title{font-weight:900; font-size:14px}
 .privacy-body{color:var(--muted); font-size:13px; max-width:72ch}
 .privacy-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
 
@@ -793,11 +795,11 @@ body[data-theme="paper"] .privacy-banner{
   padding:12px 14px;
   margin-bottom:12px;
 }
-.note-title{font-weight:1000; margin-bottom:6px}
+.note-title{font-weight:900; margin-bottom:6px}
 .note-body{color:var(--muted); line-height:1.55}
 
 .btn.primary{border-color:rgba(var(--accent-rgb), .45); background:linear-gradient(180deg, rgba(var(--accent-rgb), .28), rgba(var(--accent-rgb), .12))}
-.btn.sm{padding:8px 12px; font-size:13px; font-weight:950}
+.btn.sm{padding:8px 12px; font-size:13px; font-weight:900}
 
 .wrap-any{overflow-wrap:anywhere; word-break:break-word}
 
